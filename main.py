@@ -147,10 +147,10 @@ class Game:
         self.start_time = pg.time.get_ticks()
         self.screen_offset = pg.Vector2(0, 0)
         pg.mixer.init()
-        pg.mixer.music.load('assets/bgm.mp3')
+        pg.mixer.music.load('assets/bgm.ogg')
         pg.mixer.music.set_volume(0.3)
         pg.mixer.music.play(-1)
-        self.scream = pg.mixer.Sound('assets/scream.mp3')
+        self.scream = pg.mixer.Sound('assets/scream.ogg')
         self.explosions = 0
         self.max_balls = len(self.balls)
 
