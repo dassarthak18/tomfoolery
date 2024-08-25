@@ -1,0 +1,44 @@
+name: Build EXE
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    strategy:
+      matrix:
+        python-version: ['3.10']
+
+    steps:
+    - name: Check out the code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        if [ -f requirements.txt ]; then pip install pygame screeninfo; fi
+
+    - name: Install PyInstaller
+      run: pip install pyinstaller
+
+    - name: Build EXE
+      run: |
+        pyinstaller --onefile --windowed --add-data "assets;assets" main.py
+
+    - name: Upload EXE
+      uses: actions/upload-artifact@v3
+      with:
+        name: built-exe
+        path: dist/tomfoolery.exe
