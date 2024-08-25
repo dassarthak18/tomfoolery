@@ -28,7 +28,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        if [ -f requirements.txt ]; then pip install pygame screeninfo; fi
+        pip install pygame screeninfo
 
     - name: Install PyInstaller
       run: pip install pyinstaller
